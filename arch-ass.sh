@@ -81,7 +81,7 @@ mount "${part_boot}" /mnt/boot
 #Server = $REPO_URL
 
 
-pacstrap /mnt base dev base-dev
+pacstrap /mnt base 
 genfstab -t PARTUUID /mnt >> /mnt/etc/fstab
 echo "${hostname}" > /mnt/etc/hostname
 
