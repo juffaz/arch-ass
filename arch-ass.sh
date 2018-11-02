@@ -95,20 +95,26 @@ Server = http://repo.archlinux.fr/$arch
 
 [blackarch]
 Server = https://www.mirrorservice.org/sites/blackarch.org/blackarch//$repo/os/$arch
+
 EOF
+
 
 arch-chroot /mnt bootctl install
 
 cat <<EOF > /mnt/boot/loader/loader.conf
 default arch
+
 EOF
+
 
 cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title    Arch Linux
 linux    /vmlinuz-linux
 initrd   /initramfs-linux.img
 options  root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") rw
+
 EOF
+
 
 echo "LANG=en_GB.UTF-8" > /mnt/etc/locale.conf
 
