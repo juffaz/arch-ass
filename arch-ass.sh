@@ -118,7 +118,8 @@ EOF
 
 echo "LANG=en_GB.UTF-8" > /mnt/etc/locale.conf
 
-arch-chroot /mnt useradd -mU -s /bin/bash -G wheel,uucp,video,audio,storage,games,input "$user"
+arch-chroot /mnt useradd -mU -s /usr/bin/bash -G wheel,uucp,video,audio,storage,games,input "$user"
+arch-chroot /mnt chsh -s /usr/bin/bash
 arch-chroot /mnt pacman -S nmap curl tcpdump xterm
 
 echo "$user:$password" | chpasswd --root /mnt
