@@ -80,8 +80,8 @@ mount "${part_boot}" /mnt/boot
 #SigLevel = Optional TrustAll
 #Server = $REPO_URL
 
-
-pacstrap /mnt base 
+## pacstrap /mnt base
+pacstrap /mnt base base-devel networkmanager zsh vim git efibootmgr dialog wpa_supplicant sudo
 genfstab -t PARTUUID /mnt >> /mnt/etc/fstab
 echo "${hostname}" > /mnt/etc/hostname
 
@@ -119,8 +119,8 @@ EOF
 echo "LANG=en_GB.UTF-8" > /mnt/etc/locale.conf
 
 arch-chroot /mnt useradd -mU -s /bin/bash -G wheel,uucp,video,audio,storage,games,input "$user"
+arch-chroot /mnt pacman -S nmap curl tcpdump xterm
 
 echo "$user:$password" | chpasswd --root /mnt
 echo "root:$password" | chpasswd --root /mnt
 
-arch-chroot /mnt pacman -S nmap curl tcpdump xterm
