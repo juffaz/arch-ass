@@ -85,16 +85,16 @@ pacstrap /mnt base
 genfstab -t PARTUUID /mnt >> /mnt/etc/fstab
 echo "${hostname}" > /mnt/etc/hostname
 
-cat >>/mnt/etc/pacman.conf <<EOF
+cat <<EOF >>/mnt/etc/pacman.conf 
 [multilib]
 Include = /etc/pacman.d/mirrorlist
 
 [archlinuxfr]
 SigLevel = Never
-Server = http://repo.archlinux.fr/$arch
+Server = http://repo.archlinux.fr/\$arch
 
 [blackarch]
-Server = https://www.mirrorservice.org/sites/blackarch.org/blackarch//$repo/os/$arch
+Server = https://www.mirrorservice.org/sites/blackarch.org/blackarch//\$repo/os/\$arch
 
 EOF
 
