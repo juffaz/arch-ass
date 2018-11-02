@@ -63,17 +63,18 @@ mkdir /mnt/boot
 mount "${part_boot}" /mnt/boot
 
 ### Install and configure the basic system ###
-cat >>/etc/pacman.conf <<EOF
-[multilib]
-Include = /etc/pacman.d/mirrorlist
+#cat >>/etc/pacman.conf <<EOF
+#[multilib]
+#Include = /etc/pacman.d/mirrorlist
 
-[archlinuxfr]
-SigLevel = Never
-Server = http://repo.archlinux.fr/$arch
 
-[blackarch]
-Server = https://www.mirrorservice.org/sites/blackarch.org/blackarch//$repo/os/$arch
-EOF
+#[archlinuxfr]
+#SigLevel = Never
+#Server = http://repo.archlinux.fr/$arch
+
+#[blackarch]
+#Server = https://www.mirrorservice.org/sites/blackarch.org/blackarch//$repo/os/$arch
+#EOF
 
 #[Netherlands]
 #SigLevel = Optional TrustAll
