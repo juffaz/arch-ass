@@ -5,7 +5,7 @@
 set -uo pipefail
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
-REPO_URL="Server = http://archlinux.mirror.wearetriple.com/$repo/os/$arch"
+#REPO_URL="Server = http://archlinux.mirror.wearetriple.com/$repo/os/$arch"
 
 ### Get infomation from user ###
 hostname=$(dialog --stdout --inputbox "Enter hostname" 0 0) || exit 1
@@ -64,12 +64,23 @@ mount "${part_boot}" /mnt/boot
 
 ### Install and configure the basic system ###
 cat >>/etc/pacman.conf <<EOF
-[Netherlands]
-SigLevel = Optional TrustAll
-Server = $REPO_URL
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+
+[archlinuxfr]
+SigLevel = Never
+Server = http://repo.archlinux.fr/$arch
+
+[blackarch]
+Server = https://www.mirrorservice.org/sites/blackarch.org/blackarch//$repo/os/$arch
 EOF
 
-pacstrap /mnt mdaffin-desktop
+#[Netherlands]
+#SigLevel = Optional TrustAll
+#Server = $REPO_URL
+
+
+pacstrap /mnt base dev base-dev
 genfstab -t PARTUUID /mnt >> /mnt/etc/fstab
 echo "${hostname}" > /mnt/etc/hostname
 
