@@ -81,7 +81,7 @@ mount "${part_boot}" /mnt/boot
 #Server = $REPO_URL
 
 ## pacstrap /mnt base
-pacstrap /mnt base base-devel networkmanager zsh vim git efibootmgr dialog wpa_supplicant sudo
+pacstrap /mnt base base-devel networkmanager zsh vim git efibootmgr dialog wpa_supplicant sudo archlinux-keyring
 genfstab -t PARTUUID /mnt >> /mnt/etc/fstab
 echo "${hostname}" > /mnt/etc/hostname
 
@@ -94,6 +94,7 @@ SigLevel = Never
 Server = http://repo.archlinux.fr/\$arch
 
 [blackarch]
+SigLevel = Optional TrutAll
 Server = https://www.mirrorservice.org/sites/blackarch.org/blackarch//\$repo/os/\$arch
 
 EOF
