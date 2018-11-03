@@ -122,8 +122,9 @@ echo "LANG=en_GB.UTF-8" > /mnt/etc/locale.conf
 arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G wheel,uucp,video,audio,storage,games,input "$user"
 arch-chroot /mnt chsh -s /usr/bin/zsh
 ###arch-chroot /mnt pacman -Syy --noconfirm 
-arch-chroot /mnt pacman -Sy nmap curl tcpdump xterm --noconfirm   
+arch-chroot /mnt pacman -Sy nmap curtl tcpdump xterm xorg xorg-xinit mesa mate mate-extra --noconfirm
+arch-chroot /mnt echo "exec mate-session" > /home/juff/.xinitrc 
 
-echo "$user:$password" | chpasswd --root /mnt
-echo "root:$password" | chpasswd --root /mnt
+echo "$user:$password" | chroot /mnt chpasswd 
+echo "root:$password" | chroot /mnt chpasswd
 
