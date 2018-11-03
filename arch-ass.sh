@@ -126,4 +126,4 @@ echo "root:$password" | chroot /mnt chpasswd
 
 arch-chroot /mnt pacman -Syy --noconfirm 
 arch-chroot /mnt pacman -Syy nmap curl tcpdump xterm xorg xorg-xinit mesa mate mate-extra --noconfirm
-arch-chroot /mnt echo "exec mate-session" > /home/juff/.xinitrc 
+echo "exec mate-session" > /mnt/home/juff/.xinitrc 
