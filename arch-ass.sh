@@ -125,7 +125,7 @@ echo "$user:$password" | chroot /mnt chpasswd
 echo "root:$password" | chroot /mnt chpasswd
 echo "$user ALL=(ALL) ALL" > /mnt/etc/sudoers.d/$user
 
-yes | arch-chroot /mnt pacman -Syy --noconfirm 
+arch-chroot /mnt yes | pacman -Syy --noconfirm 
 arch-chroot /mnt pacman -Syy nmap curl tcpdump xterm xorg xorg-xinit mesa mate mate-extra network-manager-applet networkmanager yay   --noconfirm
 echo "exec mate-session" > /mnt/home/juff/.xinitrc 
 chroot /mnt systemctl enable NetworkManager
