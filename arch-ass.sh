@@ -124,6 +124,7 @@ arch-chroot /mnt chsh -s /usr/bin/zsh
 echo "$user:$password" | chroot /mnt chpasswd 
 echo "root:$password" | chroot /mnt chpasswd
 
-arch-chroot /mnt pacman -Syy --noconfirm 
-arch-chroot /mnt pacman -Syy nmap curl tcpdump xterm xorg xorg-xinit mesa mate mate-extra --noconfirm
+yes | arch-chroot /mnt pacman -Syy --noconfirm 
+arch-chroot /mnt pacman -Syy nmap curl tcpdump xterm xorg xorg-xinit mesa mate mate-extra network-manager-applet networkmanager yay   --noconfirm
 echo "exec mate-session" > /mnt/home/juff/.xinitrc 
+chroot /mnt system enable NetworkManager
