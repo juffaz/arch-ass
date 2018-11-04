@@ -123,8 +123,12 @@ arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G wheel,uucp,video,audio,storage,g
 arch-chroot /mnt chsh -s /usr/bin/zsh
 echo "$user:$password" | chroot /mnt chpasswd 
 echo "root:$password" | chroot /mnt chpasswd
+echo "$user ALL=(ALL) ALL" > /mnt/etc/sudoers.d/$user
 
 yes | arch-chroot /mnt pacman -Syy --noconfirm 
 arch-chroot /mnt pacman -Syy nmap curl tcpdump xterm xorg xorg-xinit mesa mate mate-extra network-manager-applet networkmanager yay   --noconfirm
 echo "exec mate-session" > /mnt/home/juff/.xinitrc 
-chroot /mnt system enable NetworkManager
+chroot /mnt systemctl enable NetworkManager
+umount /mnt/boot
+umount /mnt
+reboot () { echo 'Install success complete. Reboot? (y/n)' && read x && [[ "$x" == "y" ]] && /sbin/reboot; }
