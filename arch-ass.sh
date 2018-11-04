@@ -81,7 +81,7 @@ mount "${part_boot}" /mnt/boot
 #Server = $REPO_URL
 
 ## pacstrap /mnt base
-pacstrap /mnt base base-devel networkmanager zsh vim git efibootmgr dialog wpa_supplicant sudo archlinux-keyring
+pacstrap /mnt base base-devel networkmanager zsh vim git efibootmgr dialog wpa_supplicant sudo archlinux-keyring nmap curl tcpdump xterm xorg xorg-xinit mesa mate mate-extra network-manager-applet networkmanager
 genfstab -t PARTUUID /mnt >> /mnt/etc/fstab
 echo "${hostname}" > /mnt/etc/hostname
 
@@ -125,8 +125,8 @@ echo "$user:$password" | chroot /mnt chpasswd
 echo "root:$password" | chroot /mnt chpasswd
 echo "$user ALL=(ALL) ALL" > /mnt/etc/sudoers.d/$user
 
-arch-chroot /mnt yes | pacman -Syy --noconfirm 
-arch-chroot /mnt pacman -Syy nmap curl tcpdump xterm xorg xorg-xinit mesa mate mate-extra network-manager-applet networkmanager yay   --noconfirm
+#arch-chroot /mnt yes | arch-chroot /mnt pacman -Syy --noconfirm 
+#arch-chroot /mnt pacman -Syy nmap curl tcpdump xterm xorg xorg-xinit mesa mate mate-extra network-manager-applet networkmanager yay   --noconfirm
 echo "exec mate-session" > /mnt/home/juff/.xinitrc 
 chroot /mnt systemctl enable NetworkManager
 umount /mnt/boot
