@@ -101,7 +101,7 @@ EOF
 
 
 #arch-chroot /mnt bootctl install
-arch-chroot /mnt refind-efi
+arch-chroot /mnt refind-install
 
 #cat <<EOF > /mnt/boot/loader/loader.conf
 #default arch
