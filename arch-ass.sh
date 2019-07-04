@@ -81,7 +81,7 @@ mount "${part_boot}" /mnt/boot
 #Server = $REPO_URL
 
 ## pacstrap /mnt base
-pacstrap /mnt base base-devel networkmanager zsh vim git efibootmgr dialog wpa_supplicant sudo archlinux-keyring nmap curl tcpdump xterm xorg xorg-xinit mesa mate mate-extra network-manager-applet networkmanager
+pacstrap /mnt base base-devel networkmanager zsh vim git efibootmgr refind-efi dialog wpa_supplicant sudo archlinux-keyring nmap curl tcpdump xterm xorg xorg-xinit mesa mate mate-extra network-manager-applet networkmanager
 genfstab -t PARTUUID /mnt >> /mnt/etc/fstab
 echo "${hostname}" > /mnt/etc/hostname
 
@@ -100,21 +100,22 @@ Server = https://www.mirrorservice.org/sites/blackarch.org/blackarch//\$repo/os/
 EOF
 
 
-arch-chroot /mnt bootctl install
+#arch-chroot /mnt bootctl install
+arch-chroot /mnt refind-efi
 
-cat <<EOF > /mnt/boot/loader/loader.conf
-default arch
+#cat <<EOF > /mnt/boot/loader/loader.conf
+#default arch
 
-EOF
+#EOF
 
 
-cat <<EOF > /mnt/boot/loader/entries/arch.conf
-title    Arch Linux
-linux    /vmlinuz-linux
-initrd   /initramfs-linux.img
-options  root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") rw
+#cat <<EOF > /mnt/boot/loader/entries/arch.conf
+#title    Arch Linux
+#linux    /vmlinuz-linux
+#initrd   /initramfs-linux.img
+#options  root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") rw
 
-EOF
+#EOF
 
 
 echo "LANG=en_GB.UTF-8" > /mnt/etc/locale.conf
